@@ -43,8 +43,6 @@ export class AlunosService {
   }
 
   public async listar({ nome }: ListarAlunosDto): Promise<AlunoParcial[]> {
-    // ...
-
     const alunosDB = await prismaClient.aluno.findMany({
       where: {
         nome: {
@@ -58,6 +56,9 @@ export class AlunosService {
       omit: {
         authToken: true,
         senha: true,
+      },
+      include: {
+        endereco: true,
       },
     });
 
@@ -74,6 +75,9 @@ export class AlunosService {
       omit: {
         authToken: true,
         senha: true,
+      },
+      include: {
+        endereco: true,
       },
     });
 
