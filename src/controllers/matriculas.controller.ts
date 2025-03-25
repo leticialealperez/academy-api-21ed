@@ -5,10 +5,13 @@ import { MatriculasService } from "../services/matriculas.service";
 export class MatriculasController {
   public async matricular(req: Request, res: Response) {
     try {
-      const { turmaId, alunoId } = req.params;
+      const { turmaId } = req.body;
 
       const service = new MatriculasService();
-      const resultado = await service.matricularAluno({ alunoId, turmaId });
+      const resultado = await service.matricularAluno({
+        alunoId: req.alunoLogado.id,
+        turmaId,
+      });
 
       res.status(201).json({
         sucesso: true,
@@ -39,10 +42,8 @@ export class MatriculasController {
 
   public async listarTurmas(req: Request, res: Response) {
     try {
-      const { alunoId } = req.params;
-
       const service = new MatriculasService();
-      const resultado = await service.listarTurmasDeUmAluno(alunoId);
+      const resultado = await service.listarTurmasDeUmAluno(req.alunoLogado.id);
 
       res.status(200).json({
         sucesso: true,

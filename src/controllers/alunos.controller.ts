@@ -58,12 +58,11 @@ export class AlunosController {
 
   public async atualizar(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.params;
       const { nome, email, idade, senha } = req.body;
 
       const service = new AlunosService();
       const resultado = await service.atualizar({
-        id,
+        id: req.alunoLogado.id,
         nome,
         email,
         senha,
@@ -82,10 +81,8 @@ export class AlunosController {
 
   public async deletar(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.params;
-
       const service = new AlunosService();
-      const resultado = await service.excluir(id);
+      const resultado = await service.excluir(req.alunoLogado.id);
 
       res.status(200).json({
         sucesso: true,

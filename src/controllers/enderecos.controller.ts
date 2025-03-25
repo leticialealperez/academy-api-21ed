@@ -5,13 +5,12 @@ import { EnderecosService } from "../services/enderecos.service";
 export class EnderecosController {
   public async cadastrar(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.params;
       const { logradouro, numero, complemento, cep, bairro, cidade, uf, pais } =
         req.body;
 
       const service = new EnderecosService();
       const resultado = await service.cadastrar({
-        alunoId: id,
+        alunoId: req.alunoLogado.id,
         logradouro,
         numero,
         complemento,
@@ -34,13 +33,12 @@ export class EnderecosController {
 
   public async atualizar(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.params;
       const { logradouro, numero, complemento, cep, bairro, cidade, uf, pais } =
         req.body;
 
       const service = new EnderecosService();
       const resultado = await service.atualizar({
-        alunoId: id,
+        alunoId: req.alunoLogado.id,
         logradouro,
         numero,
         complemento,

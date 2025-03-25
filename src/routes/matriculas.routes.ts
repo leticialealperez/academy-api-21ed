@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { MatriculasController } from "../controllers/matriculas.controller";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 export class MatriculasRoutes {
   public static bind(): Router {
@@ -8,13 +9,17 @@ export class MatriculasRoutes {
     const controller = new MatriculasController();
 
     // matricular
-    router.post("/matriculas", controller.matricular);
+    router.post("/matriculas", [authMiddleware], controller.matricular);
 
     // listar todos os alunos matriculados em uma turma
-    router.get("/matriculas/turmas/:idTurma", controller.listarAlunos);
+    router.get(
+      "/matriculas/turmas/:idTurma",
+      [authMiddleware],
+      controller.listarAlunos
+    );
 
-    // listar todas as turmas em que um aluno esta matriculado
-    router.get("/matriculas/alunos/:idAluno", controller.listarTurmas);
+    // listar todas as turmas em que o aluno logado esta matriculado
+    router.get("/matriculas/alunos", [authMiddleware], controller.listarTurmas);
 
     return router;
   }
