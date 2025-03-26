@@ -5,7 +5,6 @@ import {
   CadastrarAlunoDto,
   ListarAlunosDto,
 } from "../dtos/alunos.dto";
-import { validate as isValidUid } from "uuid";
 import { HTTPError } from "../utils/http.error";
 
 // Tipos Utilitários TS
@@ -66,10 +65,6 @@ export class AlunosService {
   }
 
   public async buscarPorId(idAluno: string): Promise<AlunoParcial> {
-    if (!isValidUid(idAluno)) {
-      throw new HTTPError(400, "Identificador do aluno inválido");
-    }
-
     const aluno = await prismaClient.aluno.findUnique({
       where: { id: idAluno },
       omit: {

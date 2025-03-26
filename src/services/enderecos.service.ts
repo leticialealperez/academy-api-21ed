@@ -1,6 +1,5 @@
 import { Endereco } from "@prisma/client";
 import { prismaClient } from "../database/prisma.client";
-import { validate as isValidUid } from "uuid";
 import { HTTPError } from "../utils/http.error";
 import {
   AtualizarEnderecoDto,
@@ -19,7 +18,6 @@ export class EnderecosService {
     uf,
     complemento,
   }: CadastrarEnderecoDto): Promise<Endereco> {
-    console.log(alunoId);
     const enderecoJaCadastrado = await prismaClient.endereco.findUnique({
       where: { alunoId },
     });
@@ -46,10 +44,6 @@ export class EnderecosService {
   }
 
   public async buscarPorIdAluno(alunoId: string): Promise<Endereco> {
-    if (!isValidUid(alunoId)) {
-      throw new HTTPError(400, "Identificador do aluno inválido");
-    }
-
     const endereco = await prismaClient.endereco.findUnique({
       where: { alunoId },
     });

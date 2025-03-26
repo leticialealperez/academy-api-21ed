@@ -4,9 +4,12 @@ import { validate as isValidUid } from "uuid";
 import { HTTPError } from "../utils/http.error";
 import { prismaClient } from "../database/prisma.client";
 
+type AlunoParcial = Omit<Aluno, "senha" | "authToken">;
+
 type MatriculaModelada = Omit<Matricula, "alunoId" | "turmaId"> & {
-  aluno: Aluno;
-} & { turma: Turma };
+  aluno: AlunoParcial;
+  turma: Turma;
+};
 
 export class MatriculasService {
   public async matricularAluno({
@@ -14,8 +17,8 @@ export class MatriculasService {
     turmaId,
   }: CadastrarMatriculaDto): Promise<MatriculaModelada> {
     // 1 - Validar ID's enviados
-    if (!isValidUid(alunoId) || !isValidUid(turmaId)) {
-      throw new HTTPError(400, "Identificador inválido");
+    if (!isValidUid(turmaId)) {
+      throw new HTTPError(400, "Identificador da turma inválido");
     }
 
     // 2 - Validar de aluno existe
@@ -79,7 +82,12 @@ export class MatriculasService {
         turmaId,
       },
       include: {
-        aluno: true,
+        aluno: {
+          omit: {
+            senha: true,
+            authToken: true,
+          },
+        },
         turma: true,
       },
       omit: {
@@ -91,7 +99,9 @@ export class MatriculasService {
     return novaMatricula;
   }
 
-  public async listarAlunosMatriculados(turmaId: string): Promise<Aluno[]> {
+  public async listarAlunosMatriculados(
+    turmaId: string
+  ): Promise<AlunoParcial[]> {
     const turma = await prismaClient.turma.findUnique({
       where: { id: turmaId },
     });
@@ -103,7 +113,12 @@ export class MatriculasService {
     const matriculas = await prismaClient.matricula.findMany({
       where: { turmaId: turmaId, ativo: true },
       include: {
-        aluno: true,
+        aluno: {
+          omit: {
+            senha: true,
+            authToken: true,
+          },
+        },
       },
       omit: {
         turmaId: true,

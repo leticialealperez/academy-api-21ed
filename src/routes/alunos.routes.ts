@@ -2,6 +2,7 @@ import { Router } from "express";
 import { AlunosController } from "../controllers/alunos.controller";
 import { EnderecosController } from "../controllers/enderecos.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
+import { validateUidFormatMiddleware } from "../middlewares/validate-uid-format.middleware";
 
 export class AlunosRoutes {
   public static bind(): Router {
@@ -12,7 +13,11 @@ export class AlunosRoutes {
 
     // Rotas públicas - não é necessário estar logado
     router.get("/alunos", controller.listar); // listando todos os alunos
-    router.get("/alunos/:id", controller.buscarPorID); // buscar um aluno por ID
+    router.get(
+      "/alunos/:id",
+      [validateUidFormatMiddleware],
+      controller.buscarPorID
+    ); // buscar um aluno por ID
     router.post("/alunos", controller.cadastrar); // cadastrando um aluno
 
     // Rotas privadas - é preciso estar logado

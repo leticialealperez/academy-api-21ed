@@ -1,6 +1,5 @@
 import { Turma } from "@prisma/client";
 import { prismaClient } from "../database/prisma.client";
-import { validate as isValidUid } from "uuid";
 import { HTTPError } from "../utils/http.error";
 import {
   AtualizarTurmaDto,
@@ -59,10 +58,6 @@ export class TurmasService {
   }
 
   public async buscarPorId(idTurma: string): Promise<Turma> {
-    if (!isValidUid(idTurma)) {
-      throw new HTTPError(400, "Identificador da turma inválido");
-    }
-
     const turma = await prismaClient.turma.findUnique({
       where: { id: idTurma },
     });

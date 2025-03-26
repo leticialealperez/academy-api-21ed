@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { MatriculasController } from "../controllers/matriculas.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
+import { validateUidFormatMiddleware } from "../middlewares/validate-uid-format.middleware";
 
 export class MatriculasRoutes {
   public static bind(): Router {
@@ -13,13 +14,13 @@ export class MatriculasRoutes {
 
     // listar todos os alunos matriculados em uma turma
     router.get(
-      "/matriculas/turmas/:idTurma",
-      [authMiddleware],
+      "/matriculas/:id",
+      [authMiddleware, validateUidFormatMiddleware],
       controller.listarAlunos
     );
 
     // listar todas as turmas em que o aluno logado esta matriculado
-    router.get("/matriculas/alunos", [authMiddleware], controller.listarTurmas);
+    router.get("/matriculas", [authMiddleware], controller.listarTurmas);
 
     return router;
   }
