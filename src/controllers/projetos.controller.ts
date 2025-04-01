@@ -110,7 +110,7 @@ export class ProjetosController {
 
       res.status(200).json({
         sucesso: true,
-        mensagem: "Projeto do aluno atualizado",
+        mensagem: "Projeto do aluno excluido",
         dados: resultado,
       });
     } catch (error) {

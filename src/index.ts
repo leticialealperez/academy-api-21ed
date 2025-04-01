@@ -6,9 +6,11 @@ import { MatriculasRoutes } from "./routes/matriculas.routes";
 import { AuthRoutes } from "./routes/auth.routes";
 import { FasRoutes } from "./routes/fas.routes";
 import { ProjetosRoutes } from "./routes/projetos.routes";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (_, res) => {
   res.status(200).json({
