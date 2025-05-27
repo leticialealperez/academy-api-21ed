@@ -21,6 +21,7 @@ export class AuthController {
       onError(error, res);
     }
   }
+  
   public async logout(req: Request, res: Response): Promise<void> {
     try {
       const service = new AuthService();

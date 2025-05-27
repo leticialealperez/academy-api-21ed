@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { onError } from "../utils/on-error";
 import { HTTPError } from "../utils/http.error";
-import { prismaClient } from "../database/prisma.client";
-import { validate as isValidUid } from "uuid";
+import { JWT } from "../utils/jwt";
+import { AlunoLogado } from "../dtos/auth.dto";
 
 export async function authMiddleware(
   req: Request,
@@ -16,27 +16,13 @@ export async function authMiddleware(
       throw new HTTPError(401, "Token de autenticação ausente");
     }
 
-    const [, token] = bearerToken.split(" ");
+    const [, token] = bearerToken.split(" "); // "Bearer abcndhfvdhj"
 
-    // No nosso caso, o token deve ser no formato uuid
-    if (!isValidUid(token)) {
-      throw new HTTPError(400, "Token com formato inválido");
-    }
-
-    const alunoEncontrado = await prismaClient.aluno.findFirst({
-      where: { authToken: token },
-    });
-
-    if (!alunoEncontrado) {
-      throw new HTTPError(401, "Token inválido");
-    }
+    const jwt = new JWT();
+    const alunoLogado = jwt.decoder<AlunoLogado>(token);
 
     // adicionar novos dados na requisição
-    req.alunoLogado = {
-      id: alunoEncontrado.id,
-      email: alunoEncontrado.email,
-      nome: alunoEncontrado.nome,
-    };
+    req.alunoLogado = alunoLogado;
 
     next();
   } catch (error) {

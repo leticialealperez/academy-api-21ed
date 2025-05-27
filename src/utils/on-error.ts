@@ -1,11 +1,21 @@
 import { Response } from "express";
 import { HTTPError } from "./http.error";
+import { JsonWebTokenError } from "jsonwebtoken";
 
 export function onError(error: unknown, res: Response): void {
   if (error instanceof HTTPError) {
     res.status(error.statusCode).json({
       sucesso: false,
       mensagem: error.message,
+    });
+    return;
+  }
+
+  if (error instanceof JsonWebTokenError) {
+    res.status(401).json({
+      sucesso: false,
+      mensagem: "Token de autenticação inválido",
+      detalhe: error.message,
     });
     return;
   }
