@@ -3,14 +3,22 @@ import { AlunoLogado, LoginDto } from "../dtos/auth.dto";
 import { HTTPError } from "../utils/http.error";
 import { v4 as randomUUID } from "uuid";
 import { JWT } from "../utils/jwt";
+import { Bcrypt } from "../utils/bcrypt";
 
 export class AuthService {
   public async loginAluno({ email, senha }: LoginDto): Promise<string> {
     const alunoEncontrado = await prismaClient.aluno.findUnique({
-      where: { email, senha },
+      where: { email },
     });
 
     if (!alunoEncontrado) {
+      throw new HTTPError(401, "Credenciais inválidas")
+    }
+
+    const bcrypt = new Bcrypt();
+    const isPasswordMatch = await bcrypt.comparar(senha, alunoEncontrado.senha);
+
+    if (!isPasswordMatch) {
       throw new HTTPError(401, "Credenciais inválidas");
     }
 
@@ -18,7 +26,8 @@ export class AuthService {
     const token = jwt.encoder<AlunoLogado>({
       id: alunoEncontrado.id,
       nome: alunoEncontrado.nome,
-      email: alunoEncontrado.email
+      email: alunoEncontrado.email,
+      tipo: alunoEncontrado.tipo
     });
 
     return token; 

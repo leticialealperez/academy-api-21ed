@@ -1,7 +1,8 @@
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { authMiddleware } from "../middlewares/auth.middleware";
 import { ProjetosController } from "../controllers/projetos.controller";
 import { validateUidFormatMiddleware } from "../middlewares/validate-uid-format.middleware";
+import { tipoPermitido } from "../middlewares/tipo-permitido";
 
 export class ProjetosRoutes {
   public static bind(): Router {
@@ -15,15 +16,21 @@ export class ProjetosRoutes {
       [authMiddleware, validateUidFormatMiddleware],
       controller.buscarPorID
     );
-    router.post("/projetos", [authMiddleware], controller.cadastrar);
+    router.post("/projetos", 
+        [
+          authMiddleware, 
+          (req: Request, res: Response, nxt: NextFunction) =>  tipoPermitido(req, res, nxt, ['M', 'T'])
+        ], 
+        controller.cadastrar
+    );
     router.put(
       "/projetos/:id",
-      [authMiddleware, validateUidFormatMiddleware],
+      [authMiddleware, validateUidFormatMiddleware, (req: Request, res: Response, nxt: NextFunction) =>  tipoPermitido(req, res, nxt, ['T'])],
       controller.atualizar
     );
     router.delete(
       "/projetos/:id",
-      [authMiddleware, validateUidFormatMiddleware],
+      [authMiddleware, validateUidFormatMiddleware, (req: Request, res: Response, nxt: NextFunction) =>  tipoPermitido(req, res, nxt, ['T'])],
       controller.excluir
     );
 

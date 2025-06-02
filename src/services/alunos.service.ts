@@ -6,6 +6,7 @@ import {
   ListarAlunosDto,
 } from "../dtos/alunos.dto";
 import { HTTPError } from "../utils/http.error";
+import { Bcrypt } from "../utils/bcrypt";
 
 // Tipos Utilitários TS
 type AlunoParcial = Omit<Aluno, "authToken" | "senha">;
@@ -16,6 +17,7 @@ export class AlunosService {
     nome,
     senha,
     idade,
+    tipo
   }: CadastrarAlunoDto): Promise<AlunoParcial> {
     const emailJaCadastrado = await prismaClient.aluno.findUnique({
       where: { email: email },
@@ -25,12 +27,17 @@ export class AlunosService {
       throw new HTTPError(409, "E-mail já cadastrado por outro aluno");
     }
 
+    const bcrypt = new Bcrypt()
+    const senhaEncriptografada = await bcrypt.gerarHash(senha);
+
+
     const novoAluno = await prismaClient.aluno.create({
       data: {
         nome,
         email,
-        senha,
+        senha: senhaEncriptografada,
         idade,
+        tipo
       },
       omit: {
         authToken: true,
