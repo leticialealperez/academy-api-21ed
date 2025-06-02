@@ -27,16 +27,8 @@ export class AuthService {
       id: alunoEncontrado.id,
       nome: alunoEncontrado.nome,
       email: alunoEncontrado.email,
-      tipo: alunoEncontrado.tipo
     });
 
     return token; 
-  }
-
-  public async logoutAluno(alunoId: string): Promise<void> {
-    await prismaClient.aluno.update({
-      where: { id: alunoId },
-      data: { authToken: null },
-    });
   }
 }

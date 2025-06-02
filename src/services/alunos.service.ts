@@ -9,7 +9,7 @@ import { HTTPError } from "../utils/http.error";
 import { Bcrypt } from "../utils/bcrypt";
 
 // Tipos Utilitários TS
-type AlunoParcial = Omit<Aluno, "authToken" | "senha">;
+type AlunoParcial = Omit<Aluno,"senha">;
 
 export class AlunosService {
   public async cadastrar({
@@ -17,7 +17,6 @@ export class AlunosService {
     nome,
     senha,
     idade,
-    tipo
   }: CadastrarAlunoDto): Promise<AlunoParcial> {
     const emailJaCadastrado = await prismaClient.aluno.findUnique({
       where: { email: email },
@@ -36,11 +35,9 @@ export class AlunosService {
         nome,
         email,
         senha: senhaEncriptografada,
-        idade,
-        tipo
+        idade
       },
       omit: {
-        authToken: true,
         senha: true,
       },
     });
@@ -59,10 +56,7 @@ export class AlunosService {
       orderBy: {
         nome: "asc",
       },
-      omit: {
-        authToken: true,
-        senha: true,
-      },
+      omit: { senha: true },
       include: {
         endereco: true,
       },
@@ -75,7 +69,6 @@ export class AlunosService {
     const aluno = await prismaClient.aluno.findUnique({
       where: { id: idAluno },
       omit: {
-        authToken: true,
         senha: true,
       },
       include: {
@@ -108,7 +101,6 @@ export class AlunosService {
         senha,
       },
       omit: {
-        authToken: true,
         senha: true,
       },
     });
@@ -122,7 +114,6 @@ export class AlunosService {
     const alunoExcluido = await prismaClient.aluno.delete({
       where: { id: idAluno },
       omit: {
-        authToken: true,
         senha: true,
       },
     });

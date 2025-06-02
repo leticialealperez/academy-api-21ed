@@ -85,7 +85,6 @@ export class MatriculasService {
         aluno: {
           omit: {
             senha: true,
-            authToken: true,
           },
         },
         turma: true,
@@ -116,7 +115,6 @@ export class MatriculasService {
         aluno: {
           omit: {
             senha: true,
-            authToken: true,
           },
         },
       },

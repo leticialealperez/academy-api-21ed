@@ -21,19 +21,5 @@ export class AuthController {
       onError(error, res);
     }
   }
-  
-  public async logout(req: Request, res: Response): Promise<void> {
-    try {
-      const service = new AuthService();
 
-      await service.logoutAluno(req.alunoLogado.id);
-
-      res.status(200).json({
-        sucesso: true,
-        mensagem: "Logout efetuado com sucesso",
-      });
-    } catch (error) {
-      onError(error, res);
-    }
-  }
 }

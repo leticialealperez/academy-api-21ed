@@ -9,5 +9,4 @@ export interface AlunoLogado {
   id: string;
   nome: string;
   email: string;
-  tipo: TipoAluno;
 }

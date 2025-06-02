@@ -9,7 +9,6 @@ export class AuthRoutes {
     const controller = new AuthController();
 
     router.post("/login", controller.login);
-    router.post("/logout", [authMiddleware], controller.logout);
 
     return router;
   }
