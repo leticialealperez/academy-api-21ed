@@ -17,6 +17,7 @@ export class AlunosService {
     nome,
     senha,
     idade,
+    tipo
   }: CadastrarAlunoDto): Promise<AlunoParcial> {
     const emailJaCadastrado = await prismaClient.aluno.findUnique({
       where: { email: email },
@@ -41,6 +42,85 @@ export class AlunosService {
         senha: true,
       },
     });
+
+
+    const funcionalidades = await prismaClient.funcionalidade.findMany();
+
+    for(const funcionalidade of funcionalidades) {
+
+      /**
+       * Para a funcionalidade de projetos é necessário que o tipo do aluno siga as instruções:
+       * 
+       */
+      if (funcionalidade.nome === 'projetos') {
+          // Projetos
+          // Cadastrar - M e T
+          // Atualizar - T
+          // Excluir   - T
+          // Listar    - T, F ou M
+        await prismaClient.permissao.create({
+          data: {
+            alunoId: novoAluno.id,
+            funcionalidadeId: funcionalidade.id,
+            atualizar: tipo === 'T',
+            criar: tipo === 'T' || tipo === 'M' ,
+            deletar: tipo === 'T',
+            ler: true
+          }
+        })
+
+        continue
+      }
+
+      if (funcionalidade.nome === 'turmas') {
+        // Turmas
+        // Cadastrar, atualizar, excluir - T
+        // Listar - todos
+        await prismaClient.permissao.create({
+          data: {
+            alunoId: novoAluno.id,
+            funcionalidadeId: funcionalidade.id,
+            atualizar: tipo === 'T',
+            criar: tipo === 'T',
+            deletar: tipo === 'T',
+            ler: true
+          }
+        })
+
+        continue
+      }
+
+      if (funcionalidade.nome === 'matriculas') {
+        // Matricula
+        // Cadastrar - F ou M
+        // Atualizar - T
+        // Deletar   - T
+        // Listagem  - todos
+        await prismaClient.permissao.create({
+          data: {
+            alunoId: novoAluno.id,
+            funcionalidadeId: funcionalidade.id,
+            atualizar: tipo === 'T',
+            criar: tipo === 'F' || tipo === 'M',
+            deletar: tipo === 'T',
+            ler: true
+          }
+        })
+
+        continue
+      }
+
+      await prismaClient.permissao.create({
+        data: {
+          alunoId: novoAluno.id,
+          funcionalidadeId: funcionalidade.id,
+          atualizar: false,
+          criar: false,
+          deletar: false,
+          ler: false
+        }
+      })
+    }
 
     return novoAluno;
   }

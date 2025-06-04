@@ -4,6 +4,7 @@ export interface CadastrarAlunoDto {
   idade?: number;
   email: string;
   senha: string;
+  tipo: 'T' | 'M' | 'F';
 }
 
 export interface ListarAlunosDto {
@@ -11,3 +12,11 @@ export interface ListarAlunosDto {
 }
 
 export type AtualizarAlunoDto = Partial<CadastrarAlunoDto> & { id: string };
+
+export interface Permissao {
+  funcionalidade: string;
+  criar: boolean;
+  atualizar: boolean;
+  deletar: boolean;
+  ler: boolean;
+}

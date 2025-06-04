@@ -41,10 +41,10 @@ export class AlunosController {
 
   public async cadastrar(req: Request, res: Response): Promise<void> {
     try {
-      const { nome, email, idade, senha } = req.body;
+      const { nome, email, idade, senha, tipo } = req.body;
 
       const service = new AlunosService();
-      const resultado = await service.cadastrar({ nome, email, senha, idade });
+      const resultado = await service.cadastrar({ nome, email, senha, idade, tipo });
 
       res.status(201).json({
         sucesso: true,

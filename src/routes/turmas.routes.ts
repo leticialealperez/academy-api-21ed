@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { TurmasController } from "../controllers/turmas.controller";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 export class TurmasRoutes {
   public static bind(): Router {
@@ -7,11 +8,11 @@ export class TurmasRoutes {
 
     const controller = new TurmasController();
 
-    router.get("/turmas", controller.listar);
-    router.get("/turmas/:id", controller.buscarPorID);
-    router.post("/turmas", controller.cadastrar);
-    router.put("/turmas/:id", controller.atualizar);
-    router.delete("/turmas/:id", controller.deletar);
+    router.get("/turmas", [authMiddleware], controller.listar);
+    router.get("/turmas/:id", [authMiddleware], controller.buscarPorID);
+    router.post("/turmas", [authMiddleware], controller.cadastrar);
+    router.put("/turmas/:id", [authMiddleware], controller.atualizar);
+    router.delete("/turmas/:id", [authMiddleware], controller.deletar);
 
     return router;
   }
