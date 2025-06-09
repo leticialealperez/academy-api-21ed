@@ -3,7 +3,8 @@ import { onError } from "../utils/on-error";
 import { AuthService } from "../services/auth.service";
 
 export class AuthController {
-  public async login(req: Request, res: Response): Promise<void> {
+  public static async login(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Auth']
     try {
       const { email, senha } = req.body;
 

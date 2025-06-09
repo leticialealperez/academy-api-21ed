@@ -1,0 +1,880 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "API Academy",
+    "version": "1.0.0",
+    "description": "API para controle acadêmico de alunos e seus projetos",
+    "contact": {
+      "name": "Leticia Leal",
+      "email": "leticia.leal@growdev.academy",
+      "url": "https://github.com/leticialealperez"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://minhaurl-api.render.com/v1",
+      "description": "V1 do sistema"
+    },
+    {
+      "url": "http://minhaurl-api.render.com/v2",
+      "description": "V2 do sistema"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Recursos de autenticação e autorização"
+    },
+    {
+      "name": "Alunos",
+      "description": "Todos as funcionalidades para alunos"
+    },
+    {
+      "name": "Turmas",
+      "description": "Todos as funcionalidades para turmas"
+    },
+    {
+      "name": "Matriculas",
+      "description": "Todos as funcionalidades para matriculas"
+    },
+    {
+      "name": "Projetos",
+      "description": "Todos as funcionalidades para projetos"
+    }
+  ],
+  "paths": {
+    "/alunos": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Alunos"
+        ],
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "idade": {
+                    "example": "any"
+                  },
+                  "senha": {
+                    "example": "any"
+                  },
+                  "tipo": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Alunos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "idade": {
+                    "example": "any"
+                  },
+                  "senha": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Alunos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/alunos/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/alunos/enderecos": {
+      "post": {
+        "tags": [
+          "Alunos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "logradouro": {
+                    "example": "any"
+                  },
+                  "numero": {
+                    "example": "any"
+                  },
+                  "complemento": {
+                    "example": "any"
+                  },
+                  "cep": {
+                    "example": "any"
+                  },
+                  "bairro": {
+                    "example": "any"
+                  },
+                  "cidade": {
+                    "example": "any"
+                  },
+                  "uf": {
+                    "example": "any"
+                  },
+                  "pais": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Alunos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "logradouro": {
+                    "example": "any"
+                  },
+                  "numero": {
+                    "example": "any"
+                  },
+                  "complemento": {
+                    "example": "any"
+                  },
+                  "cep": {
+                    "example": "any"
+                  },
+                  "bairro": {
+                    "example": "any"
+                  },
+                  "cidade": {
+                    "example": "any"
+                  },
+                  "uf": {
+                    "example": "any"
+                  },
+                  "pais": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "senha": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/matriculas": {
+      "post": {
+        "tags": [
+          "Matriculas"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "turmaId": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Matriculas"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/matriculas/{id}": {
+      "get": {
+        "tags": [
+          "Matriculas"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/projetos": {
+      "get": {
+        "tags": [
+          "Projetos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Projetos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ferramenta": {
+                    "example": "any"
+                  },
+                  "status": {
+                    "example": "any"
+                  },
+                  "titulo": {
+                    "example": "any"
+                  },
+                  "descricao": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projetos/{id}": {
+      "get": {
+        "tags": [
+          "Projetos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projetos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ferramenta": {
+                    "example": "any"
+                  },
+                  "status": {
+                    "example": "any"
+                  },
+                  "titulo": {
+                    "example": "any"
+                  },
+                  "descricao": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Projetos"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/turmas": {
+      "get": {
+        "tags": [
+          "Turmas"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "programa",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "edicao",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Turmas"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createTurma"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/createTurma"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turmas/{id}": {
+      "get": {
+        "tags": [
+          "Turmas"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Turmas"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "edicao": {
+                    "example": "any"
+                  },
+                  "maxAlunos": {
+                    "example": "any"
+                  },
+                  "programa": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Turmas"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "respostaSucesso": {
+        "type": "object",
+        "properties": {
+          "sucesso": {
+            "type": "boolean",
+            "example": true
+          },
+          "mensagem": {
+            "type": "string",
+            "example": "Mensagem de sucesso"
+          },
+          "dados": {
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "required": [
+          "sucesso",
+          "mensagem",
+          "dados"
+        ],
+        "xml": {
+          "name": "respostaSucesso"
+        }
+      },
+      "respostaFalha": {
+        "type": "object",
+        "properties": {
+          "sucesso": {
+            "type": "boolean",
+            "example": false
+          },
+          "mensagem": {
+            "type": "string",
+            "example": "Mensagem de falha"
+          },
+          "detalhe": {
+            "type": "string",
+            "example": "Mensagem com o erro detalhado"
+          }
+        },
+        "required": [
+          "sucesso",
+          "mensagem"
+        ],
+        "xml": {
+          "name": "respostaFalha"
+        }
+      },
+      "turma": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "00b6b0b3-fd88-4423-8cda-4155a3317151"
+          },
+          "programa": {
+            "type": "string",
+            "example": "Programa Starter"
+          },
+          "edicao": {
+            "type": "number",
+            "example": 21
+          },
+          "maxAlunos": {
+            "type": "number",
+            "example": 30
+          },
+          "criadoEm": {
+            "type": "string",
+            "example": "2025-06-05T00:43:41.842Z"
+          },
+          "atualizado_em": {
+            "type": "string",
+            "example": "2025-06-05T00:43:41.842Z"
+          }
+        },
+        "required": [
+          "id",
+          "programa",
+          "edicao",
+          "maxAlunos"
+        ],
+        "xml": {
+          "name": "turma"
+        }
+      },
+      "createTurma": {
+        "type": "object",
+        "properties": {
+          "programa": {
+            "type": "string",
+            "example": "Programa Starter"
+          },
+          "edicao": {
+            "type": "number",
+            "example": 21
+          },
+          "maxAlunos": {
+            "type": "number",
+            "example": 30
+          }
+        },
+        "required": [
+          "programa",
+          "edicao",
+          "maxAlunos"
+        ],
+        "xml": {
+          "name": "createTurma"
+        }
+      }
+    }
+  }
+}

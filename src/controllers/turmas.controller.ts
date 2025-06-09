@@ -4,7 +4,8 @@ import { onError } from "../utils/on-error";
 import { TurmasService } from "../services/turmas.service";
 
 export class TurmasController {
-  public async listar(req: Request, res: Response): Promise<void> {
+  public static async listar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Turmas']
     try {
       const { programa, edicao } = req.query;
 
@@ -24,7 +25,8 @@ export class TurmasController {
     }
   }
 
-  public async buscarPorID(req: Request, res: Response): Promise<void> {
+  public static async buscarPorID(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Turmas']
     try {
       const { id } = req.params;
 
@@ -41,7 +43,12 @@ export class TurmasController {
     }
   }
 
-  public async cadastrar(req: Request, res: Response): Promise<void> {
+  public static async cadastrar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Turmas']
+    /*  #swagger.requestBody = {
+            required: true,
+            schema: { $ref: "#/components/schemas/createTurma" }
+    } */
     try {
       const { edicao, maxAlunos, programa } = req.body;
 
@@ -62,7 +69,8 @@ export class TurmasController {
     }
   }
 
-  public async atualizar(req: Request, res: Response): Promise<void> {
+  public static async atualizar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Turmas']
     try {
       const { id } = req.params;
       const { edicao, maxAlunos, programa } = req.body;
@@ -85,7 +93,8 @@ export class TurmasController {
     }
   }
 
-  public async deletar(req: Request, res: Response): Promise<void> {
+  public static async deletar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Turmas']
     try {
       const { id } = req.params;
 

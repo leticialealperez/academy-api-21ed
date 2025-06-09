@@ -3,7 +3,8 @@ import { onError } from "../utils/on-error";
 import { ProjetosService } from "../services/projetos.service";
 
 export class ProjetosController {
-  public async listar(req: Request, res: Response): Promise<void> {
+  public static async listar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Projetos']
     try {
       // 1 - inputs
       const alunoId = req.alunoLogado.id;
@@ -23,7 +24,8 @@ export class ProjetosController {
     }
   }
 
-  public async buscarPorID(req: Request, res: Response): Promise<void> {
+  public static async buscarPorID(req: Request, res: Response): Promise<void> {
+     // #swagger.tags = ['Projetos']
     try {
       // 1 - inputs
       const alunoId = req.alunoLogado.id;
@@ -47,7 +49,8 @@ export class ProjetosController {
     }
   }
 
-  public async cadastrar(req: Request, res: Response): Promise<void> {
+  public static async cadastrar(req: Request, res: Response): Promise<void> {
+     // #swagger.tags = ['Projetos']
     try {
       const { ferramenta, status, titulo, descricao } = req.body;
       const alunoId = req.alunoLogado.id;
@@ -71,7 +74,8 @@ export class ProjetosController {
     }
   }
 
-  public async atualizar(req: Request, res: Response): Promise<void> {
+  public static async atualizar(req: Request, res: Response): Promise<void> {
+     // #swagger.tags = ['Projetos']
     try {
       const { ferramenta, status, titulo, descricao } = req.body;
       const alunoId = req.alunoLogado.id;
@@ -97,7 +101,8 @@ export class ProjetosController {
     }
   }
 
-  public async excluir(req: Request, res: Response): Promise<void> {
+  public static async excluir(req: Request, res: Response): Promise<void> {
+     // #swagger.tags = ['Projetos']
     try {
       const alunoId = req.alunoLogado.id;
       const { id } = req.params;

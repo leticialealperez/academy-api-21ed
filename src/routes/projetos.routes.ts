@@ -7,29 +7,27 @@ export class ProjetosRoutes {
   public static bind(): Router {
     const router = Router();
 
-    const controller = new ProjetosController();
-
-    router.get("/projetos", [authMiddleware], controller.listar);
+    router.get("/projetos", [authMiddleware], ProjetosController.listar);
     router.get(
       "/projetos/:id",
       [authMiddleware, validateUidFormatMiddleware],
-      controller.buscarPorID
+      ProjetosController.buscarPorID
     );
     router.post("/projetos", 
         [
           authMiddleware, 
         ], 
-        controller.cadastrar
+        ProjetosController.cadastrar
     );
     router.put(
       "/projetos/:id",
       
-      controller.atualizar
+      ProjetosController.atualizar
     );
     router.delete(
       "/projetos/:id",
       [authMiddleware],
-      controller.excluir
+      ProjetosController.excluir
     );
 
     return router;

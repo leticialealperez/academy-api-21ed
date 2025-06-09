@@ -6,13 +6,11 @@ export class TurmasRoutes {
   public static bind(): Router {
     const router = Router();
 
-    const controller = new TurmasController();
-
-    router.get("/turmas", [authMiddleware], controller.listar);
-    router.get("/turmas/:id", [authMiddleware], controller.buscarPorID);
-    router.post("/turmas", [authMiddleware], controller.cadastrar);
-    router.put("/turmas/:id", [authMiddleware], controller.atualizar);
-    router.delete("/turmas/:id", [authMiddleware], controller.deletar);
+    router.get("/turmas", [authMiddleware], TurmasController.listar);
+    router.get("/turmas/:id", [authMiddleware], TurmasController.buscarPorID);
+    router.post("/turmas", [authMiddleware], TurmasController.cadastrar);
+    router.put("/turmas/:id", [authMiddleware], TurmasController.atualizar);
+    router.delete("/turmas/:id", [authMiddleware], TurmasController.deletar);
 
     return router;
   }

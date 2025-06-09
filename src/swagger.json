@@ -1,0 +1,135 @@
+{
+    "openapi": "3.0.4",
+    "info": {
+        "title": "API Academy",
+        "version": "1.0.0",
+        "description": "API para controle acadêmico de alunos e seus projetos",
+        "contact": {
+            "name": "Leticia Leal",
+            "email": "leticia.leal@growdev.academy",
+            "url": "https://github.com/leticialealperez"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://minhaurl-api.render.com/v1",
+            "description": "V1 do sistema"
+        },
+        {
+            "url": "http://minhaurl-api.render.com/v2",
+            "description": "V2 do sistema"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Recursos de autenticação e autorização"
+        },
+        {
+            "name": "Alunos",
+            "description": "Todos as funcionalidades para alunos"
+        },
+        {
+            "name": "Turmas",
+            "description": "Todos as funcionalidades para turmas"
+        },
+        {
+            "name": "Matriculas",
+            "description": "Todos as funcionalidades para matriculas"
+        },
+        {
+            "name": "Projetos",
+            "description": "Todos as funcionalidades para projetos"
+        }
+
+    ],
+    "paths": {
+        "/turmas": {
+            "get": {
+                "tags": ["Turmas"],
+                "summary": "Rota para listagem de turmas",
+                "description": "Esta é uma rota publica que pode ser acessada mesmo não estando autenticado.",
+                "parameters": [
+                    {
+                        "name": "nome",
+                        "description": "Nome da turma ou parte do nome da turma",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Turma 21ed"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resposta de sucesso para a listagem",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "sucesso": {
+                                            "type": "boolean",
+                                            "example": true,
+                                            "description": "Indica se a requisição deu sucesso ou não"
+                                        },
+                                        "mensagem": {
+                                            "type": "string",
+                                            "example": "Turmas listadas com sucesso",
+                                            "description": "Indicativo textual sobre o ocorrido na requisição"
+                                        },
+                                        "dados": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "description": "Identificador da turma"
+                                                    },
+                                                    "programa": {
+                                                        "type": "string",
+                                                        "description": "Nome do programa de formação da turma"
+                                                    },
+                                                    "edicao": {
+                                                        "type": "number",
+                                                        "format": "integer",
+                                                        "description": "Número da edição da formação"
+                                                    },
+                                                    "maxAlunos": {
+                                                        "type": "number",
+                                                        "format": "integer",
+                                                        "description": "Quantidade máxima de matriculas aceitas na turma"
+                                                    },
+                                                    "criadoEm": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "description": "Data em que o registro foi criado"
+                                                    },
+                                                    "atualizado_em": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "description": "Data em que o registro foi atualizado pela última vez"
+                                                    }
+                                                },
+                                                "required": ["id", "programa", "edicao", "maxAlunos"]
+                                            }
+                                        }
+                                    },
+                                    "required": ["sucesso", "mensagem", "dados"]
+                                }
+                            }
+                        }
+                    },
+                    "401": {},
+                    "403": {},
+                    "500": {}
+                }
+            },
+            "post": {}
+        },
+        "/turmas/{id}": {}
+    }
+}

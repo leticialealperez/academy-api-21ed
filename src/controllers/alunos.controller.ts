@@ -3,8 +3,9 @@ import { AlunosService } from "../services/alunos.service";
 import { onError } from "../utils/on-error";
 
 export class AlunosController {
-  public async listar(req: Request, res: Response): Promise<void> {
+  public static async listar(req: Request, res: Response): Promise<void> {
     try {
+      // #swagger.tags = ['Alunos']
       const { nome } = req.query;
 
       const service = new AlunosService();
@@ -22,7 +23,8 @@ export class AlunosController {
     }
   }
 
-  public async buscarPorID(req: Request, res: Response): Promise<void> {
+  public static async buscarPorID(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Alunos']
     try {
       const { id } = req.params;
 
@@ -39,7 +41,8 @@ export class AlunosController {
     }
   }
 
-  public async cadastrar(req: Request, res: Response): Promise<void> {
+  public static async cadastrar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Alunos']
     try {
       const { nome, email, idade, senha, tipo } = req.body;
 
@@ -56,7 +59,8 @@ export class AlunosController {
     }
   }
 
-  public async atualizar(req: Request, res: Response): Promise<void> {
+  public static async atualizar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Alunos']
     try {
       const { nome, email, idade, senha } = req.body;
 
@@ -79,7 +83,8 @@ export class AlunosController {
     }
   }
 
-  public async deletar(req: Request, res: Response): Promise<void> {
+  public static async deletar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Alunos']
     try {
       const service = new AlunosService();
       const resultado = await service.excluir(req.alunoLogado.id);

@@ -3,7 +3,8 @@ import { onError } from "../utils/on-error";
 import { MatriculasService } from "../services/matriculas.service";
 
 export class MatriculasController {
-  public async matricular(req: Request, res: Response) {
+  public static async matricular(req: Request, res: Response) {
+    // #swagger.tags = ['Matriculas']
     try {
       const { turmaId } = req.body;
 
@@ -23,7 +24,8 @@ export class MatriculasController {
     }
   }
 
-  public async listarAlunos(req: Request, res: Response) {
+  public static async listarAlunos(req: Request, res: Response) {
+    // #swagger.tags = ['Matriculas']
     try {
       const { id } = req.params;
 
@@ -40,7 +42,8 @@ export class MatriculasController {
     }
   }
 
-  public async listarTurmas(req: Request, res: Response) {
+  public static async listarTurmas(req: Request, res: Response) {
+    // #swagger.tags = ['Matriculas']
     try {
       const service = new MatriculasService();
       const resultado = await service.listarTurmasDeUmAluno(req.alunoLogado.id);

@@ -7,20 +7,18 @@ export class MatriculasRoutes {
   public static bind(): Router {
     const router = Router();
 
-    const controller = new MatriculasController();
-
     // matricular
-    router.post("/matriculas", [authMiddleware], controller.matricular);
+    router.post("/matriculas", [authMiddleware], MatriculasController.matricular);
 
     // listar todos os alunos matriculados em uma turma
     router.get(
       "/matriculas/:id",
       [authMiddleware, validateUidFormatMiddleware],
-      controller.listarAlunos
+      MatriculasController.listarAlunos
     );
 
     // listar todas as turmas em que o aluno logado esta matriculado
-    router.get("/matriculas", [authMiddleware], controller.listarTurmas);
+    router.get("/matriculas", [authMiddleware], MatriculasController.listarTurmas);
 
     return router;
   }

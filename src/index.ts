@@ -6,10 +6,12 @@ import { MatriculasRoutes } from "./routes/matriculas.routes";
 import { AuthRoutes } from "./routes/auth.routes";
 import { ProjetosRoutes } from "./routes/projetos.routes";
 import cors from "cors";
+import { DocsRoutes } from "./routes/docs.routes";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
 
 app.get("/", (_, res) => {
   res.status(200).json({
@@ -18,6 +20,7 @@ app.get("/", (_, res) => {
   });
 });
 
+app.use(DocsRoutes.bind());
 app.use(AlunosRoutes.bind());
 app.use(TurmasRoutes.bind());
 app.use(MatriculasRoutes.bind());

@@ -3,7 +3,8 @@ import { onError } from "../utils/on-error";
 import { EnderecosService } from "../services/enderecos.service";
 
 export class EnderecosController {
-  public async cadastrar(req: Request, res: Response): Promise<void> {
+  public static async cadastrar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Alunos']
     try {
       const { logradouro, numero, complemento, cep, bairro, cidade, uf, pais } =
         req.body;
@@ -31,7 +32,8 @@ export class EnderecosController {
     }
   }
 
-  public async atualizar(req: Request, res: Response): Promise<void> {
+  public static async atualizar(req: Request, res: Response): Promise<void> {
+    // #swagger.tags = ['Alunos']
     try {
       const { logradouro, numero, complemento, cep, bairro, cidade, uf, pais } =
         req.body;
