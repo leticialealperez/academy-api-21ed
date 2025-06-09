@@ -10,5 +10,5 @@ export interface AlunoLogado {
   id: string;
   nome: string;
   email: string;
-  permissoes: Permissao[]
+  tipo: TipoAluno;
 }

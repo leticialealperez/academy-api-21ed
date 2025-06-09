@@ -3,23 +3,22 @@ import { AlunosController } from "../controllers/alunos.controller";
 import { EnderecosController } from "../controllers/enderecos.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
 import { validateUidFormatMiddleware } from "../middlewares/validate-uid-format.middleware";
+import { blockFormado } from "../middlewares/block-formado.middlerware";
+import { blockMatriculado } from "../middlewares/block-matriculado.middlerware";
 
 export class AlunosRoutes {
   public static bind(): Router {
     const router = Router();
 
-    router.get("/alunos", AlunosController.listar);
+    router.get("/alunos", [authMiddleware, blockFormado, blockMatriculado], AlunosController.listar);
     router.get(
       "/alunos/:id",
-      [validateUidFormatMiddleware],
+      [authMiddleware, blockFormado, blockMatriculado, validateUidFormatMiddleware],
       AlunosController.buscarPorID
     ); 
     router.post("/alunos", AlunosController.cadastrar); 
-
-    // Rotas privadas - é preciso estar logado
-    router.put("/alunos", [authMiddleware], AlunosController.atualizar); // atualizar um aluno
-    router.delete("/alunos", [authMiddleware], AlunosController.deletar); // excluir um aluno
-
+    router.put("/alunos", [authMiddleware], AlunosController.atualizar);
+    router.delete("/alunos", [authMiddleware], AlunosController.deletar);
     router.post(
       "/alunos/enderecos",
       [authMiddleware],
