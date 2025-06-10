@@ -1,4 +1,4 @@
-import { prismaClient } from "../database/prisma.client";
+import prismaClient from "../database/prisma.client";
 import { AlunoLogado, LoginDto } from "../dtos/auth.dto";
 import { HTTPError } from "../utils/http.error";
 import { JWT } from "../utils/jwt";

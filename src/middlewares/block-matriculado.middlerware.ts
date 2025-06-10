@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { onError } from "../utils/on-error";
 import { HTTPError } from "../utils/http.error";
-import { prismaClient } from "../database/prisma.client";
 import { Aluno, TipoAluno } from "@prisma/client";
 
 export async function blockMatriculado(

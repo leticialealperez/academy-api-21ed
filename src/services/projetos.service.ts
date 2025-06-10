@@ -1,5 +1,5 @@
 import { Projeto } from "@prisma/client";
-import { prismaClient } from "../database/prisma.client";
+import prismaClient from "../database/prisma.client";
 import {
   AtualizarProjetoDto,
   BuscarPorIdDto,

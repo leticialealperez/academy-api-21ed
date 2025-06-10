@@ -1,5 +1,5 @@
 import { Endereco } from "@prisma/client";
-import { prismaClient } from "../database/prisma.client";
+import prismaClient from "../database/prisma.client";
 import { HTTPError } from "../utils/http.error";
 import {
   AtualizarEnderecoDto,
@@ -7,6 +7,7 @@ import {
 } from "../dtos/endereco.dto";
 
 export class EnderecosService {
+  
   public async cadastrar({
     alunoId,
     bairro,

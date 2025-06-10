@@ -1,5 +1,5 @@
 import { Turma } from "@prisma/client";
-import { prismaClient } from "../database/prisma.client";
+import prismaClient  from "../database/prisma.client";
 import { HTTPError } from "../utils/http.error";
 import {
   AtualizarTurmaDto,
@@ -8,6 +8,8 @@ import {
 } from "../dtos/turmas.dto";
 
 export class TurmasService {
+
+
   public async cadastrar({
     edicao,
     maxAlunos,

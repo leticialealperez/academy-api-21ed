@@ -2,7 +2,7 @@ import { Aluno, Matricula, Turma } from "@prisma/client";
 import { CadastrarMatriculaDto } from "../dtos/matricula.dto";
 import { validate as isValidUid } from "uuid";
 import { HTTPError } from "../utils/http.error";
-import { prismaClient } from "../database/prisma.client";
+import prismaClient from "../database/prisma.client";
 
 type AlunoParcial = Omit<Aluno, "senha" | "authToken">;
 

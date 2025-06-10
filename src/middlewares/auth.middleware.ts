@@ -3,7 +3,7 @@ import { onError } from "../utils/on-error";
 import { HTTPError } from "../utils/http.error";
 import { JWT } from "../utils/jwt";
 import { AlunoLogado } from "../dtos/auth.dto";
-import { prismaClient } from "../database/prisma.client";
+import prismaClient  from "../database/prisma.client";
 
 export async function authMiddleware(
   req: Request,

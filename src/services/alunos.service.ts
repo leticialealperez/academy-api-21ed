@@ -1,5 +1,5 @@
 import { Aluno } from "@prisma/client";
-import { prismaClient } from "../database/prisma.client";
+import prismaClient from "../database/prisma.client";
 import {
   AtualizarAlunoDto,
   CadastrarAlunoDto,
@@ -12,6 +12,7 @@ import { Bcrypt } from "../utils/bcrypt";
 type AlunoParcial = Omit<Aluno,"senha">;
 
 export class AlunosService {
+
   public async cadastrar({
     email,
     nome,
@@ -27,7 +28,7 @@ export class AlunosService {
       throw new HTTPError(409, "E-mail já cadastrado por outro aluno");
     }
 
-    const bcrypt = new Bcrypt()
+    const bcrypt = new Bcrypt();
     const senhaEncriptografada = await bcrypt.gerarHash(senha);
 
 
