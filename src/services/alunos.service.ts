@@ -31,7 +31,6 @@ export class AlunosService {
     const bcrypt = new Bcrypt();
     const senhaEncriptografada = await bcrypt.gerarHash(senha);
 
-
     const novoAluno = await prismaClient.aluno.create({
       data: {
         nome,
